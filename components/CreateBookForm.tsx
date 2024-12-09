@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
 import React from "react";
 import { CreateBook, createBook, getAllBooks } from "../services/books";
+import { AxiosError } from "axios";
 
 interface CreateBookFormProps {
     onSuccess: () => void;
@@ -12,15 +13,18 @@ const CreateBookForm: React.FC<CreateBookFormProps> = ({ onSuccess }) => {
     const [form] = Form.useForm();
     const handleSubmit = (values: CreateBook) => {
         mutation.mutate(values);
-        queryClient.invalidateQueries({ queryKey: ['books'] })
-        form.resetFields();
-        onSuccess();
     }
     const mutation = useMutation({
-        mutationFn: (request: CreateBook) => {
-            return createBook(request);
+        mutationFn: createBook,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['books'] })
+            onSuccess();
+        },
+        onError: (err: AxiosError) => {
+            console.error(err);
         }
     });
+
     return (
         <Form form={form} onFinish={handleSubmit}>
             <Form.Item

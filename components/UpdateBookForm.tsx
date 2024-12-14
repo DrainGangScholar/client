@@ -1,21 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
 import React from "react";
-import { CreateBook, createBook } from "../services/books";
+import { UpdateBook, updateBook } from "../services/books";
 import { AxiosError } from "axios";
 
-interface CreateBookFormProps {
+interface UpdateBookFormProps {
     onSuccess: () => void;
+    initialValues?: UpdateBook;
 }
 
-const CreateBookForm: React.FC<CreateBookFormProps> = ({ onSuccess }) => {
+const UpdateBookForm: React.FC<UpdateBookFormProps> = ({ onSuccess, initialValues}) => {
     const queryClient = useQueryClient();
     const [form] = Form.useForm();
-    const handleSubmit = (values: CreateBook) => {
+    const handleSubmit = (values: UpdateBook) => {
         mutation.mutate(values);
     }
     const mutation = useMutation({
-        mutationFn: createBook,
+        mutationFn: updateBook,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['books'] })
             onSuccess();
@@ -26,7 +27,7 @@ const CreateBookForm: React.FC<CreateBookFormProps> = ({ onSuccess }) => {
     });
 
     return (
-        <Form form={form} onFinish={handleSubmit}>
+        <Form form={form} onFinish={handleSubmit} initialValues={initialValues }>
             <Form.Item
                 label="ISBN"
                 name="isbn"
@@ -54,5 +55,4 @@ const CreateBookForm: React.FC<CreateBookFormProps> = ({ onSuccess }) => {
         </Form>
     );
 };
-
-export default CreateBookForm;
+export default UpdateBookForm;

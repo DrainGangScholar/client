@@ -33,21 +33,21 @@ const UpdateBookForm: React.FC<UpdateBookFormProps> = ({ onSuccess, initialValue
                 name="isbn"
                 rules={[{ required: true, message: 'Please input ISBN!' }]}
             >
-                <Input style={{ width: '100%' }} />
+                <Input />
             </Form.Item>
             <Form.Item
                 label="Name"
                 name="name"
                 rules={[{ required: true, message: 'Please input Name!' }]}
             >
-                <Input style={{ width: '100%' }} />
+                <Input />
             </Form.Item>
             <Form.Item
                 label="Description"
                 name="description"
                 rules={[{ required: true, message: 'Please input Description!' }]}
             >
-                <Input.TextArea style={{ width: '100%' }} />
+                <Input.TextArea/>
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit">Submit</Button>

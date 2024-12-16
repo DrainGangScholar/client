@@ -44,7 +44,7 @@ const BookTable: React.FC<BookTableProps> = () => {
             key: 'actions',
             render: (record: any) => (
                 <>
-                    <Button onClick={() => { handleEdit(record) }}>Edit</Button>
+                    <Button onClick={() =>  handleEdit(record) }>Edit</Button>
                 </>
             ),
         }
@@ -71,7 +71,6 @@ const BookTable: React.FC<BookTableProps> = () => {
             )}
             {isCreateModalOpen && (
                 <Modal
-                    title="Napravi novu knjigu"
                     open={isCreateModalOpen}
                     onCancel={hideCreateModal}
                     footer={null}

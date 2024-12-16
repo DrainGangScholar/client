@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import React from "react";
 import { CreateBook, createBook } from "../services/books";
 import { AxiosError } from "axios";
@@ -26,32 +26,35 @@ const CreateBookForm: React.FC<CreateBookFormProps> = ({ onSuccess }) => {
     });
 
     return (
-        <Form form={form} onFinish={handleSubmit}>
-            <Form.Item
-                label="ISBN"
-                name="isbn"
-                rules={[{ required: true, message: 'Please input ISBN!' }]}
-            >
-                <Input style={{ width: '100%' }} />
-            </Form.Item>
-            <Form.Item
-                label="Name"
-                name="name"
-                rules={[{ required: true, message: 'Please input Name!' }]}
-            >
-                <Input style={{ width: '100%' }} />
-            </Form.Item>
-            <Form.Item
-                label="Description"
-                name="description"
-                rules={[{ required: true, message: 'Please input Description!' }]}
-            >
-                <Input.TextArea style={{ width: '100%' }} />
-            </Form.Item>
-            <Form.Item>
-                <Button type="primary" htmlType="submit">Submit</Button>
-            </Form.Item>
-        </Form>
+        <>
+            <Typography.Title level={4} style={{ textAlign: 'center' }}> Napravi novu knjigu</Typography.Title>
+            <Form form={form} labelCol={{ span: 5 }} onFinish={handleSubmit}>
+                <Form.Item
+                    label="ISBN"
+                    name="isbn"
+                    rules={[{ required: true, message: 'Please input ISBN!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Name"
+                    name="name"
+                    rules={[{ required: true, message: 'Please input Name!' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Description"
+                    name="description"
+                    rules={[{ required: true, message: 'Please input Description!' }]}
+                >
+                    <Input.TextArea />
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">Submit</Button>
+                </Form.Item>
+            </Form>
+        </>
     );
 };
 
